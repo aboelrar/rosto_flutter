@@ -130,6 +130,8 @@ class homestate extends State<HomeScreen> {
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(right: 10,left: 10,bottom: 10),
+
+
                                   child: Card(
                                     elevation: 10,
                                     child: Container(
