@@ -6,5 +6,7 @@ class apis {
 
   static String branshes='${rosto}Branch/getAll/${userName}/${password}';
 
+  static String categories='${rosto}Category/getAllMainCategories/${userName}/${password}/';
+
 
 }
