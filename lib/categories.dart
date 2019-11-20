@@ -7,6 +7,7 @@ import 'package:rosto_f/categories_list.dart';
 import 'package:rosto_f/categories_list.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
+import 'package:rosto_f/products.dart';
 
 import 'categories_list.dart';
 
@@ -52,7 +53,7 @@ class categoriesState extends State<categories> {
             children: <Widget>[
               FutureBuilder(
                 future: get_data(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
+           builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if(snapshot.data==null)
                     {
                     return Text('Loading....');
@@ -126,80 +127,91 @@ class categoriesState extends State<categories> {
                             child: GridView.count(
                               crossAxisCount: 2,
                               children: List.generate(2, (index) {
-                                return Center(
-                                    child: Card(
-                                      margin: EdgeInsets.only(left: 15.0, right: 15.0),
-                                      elevation: 10.0,
-                                      child: Container(
-                                        height: 250.0,
-                                        child: Column(
-                                          children: <Widget>[
-                                            Card(
-                                              elevation: 10.0,
-                                              child: Image.network(
-                                                snapshot.data[index].image,
-                                                height: 100.0,
-                                                width: MediaQuery.of(context).size.width,
-                                                fit: BoxFit.cover,
-                                              ),
-                                              margin: EdgeInsets.only(
-                                                  right: 15.0, left: 15.0, top: 15.0),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 20.0, top: 5.0),
-                                              child: Align(
-                                                alignment: Alignment.topRight,
-                                                child: Text(
-                                                  snapshot.data[index].title,
-                                                  style: TextStyle(
-                                                      fontFamily: 'thesansbold',
-                                                      fontSize: 13.0,
-                                                      color: Colors.black),
+                                return GestureDetector(
+                                  onTap: ()
+                                  {
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (BuildContext context)
+                                        {
+                                          return products();
+                                        }
+                                    ));
+                                  },
+                                  child: Center(
+                                      child: Card(
+                                        margin: EdgeInsets.only(left: 15.0, right: 15.0),
+                                        elevation: 10.0,
+                                        child: Container(
+                                          height: 250.0,
+                                          child: Column(
+                                            children: <Widget>[
+                                              Card(
+                                                elevation: 10.0,
+                                                child: Image.network(
+                                                  snapshot.data[index].image,
+                                                  height: 100.0,
+                                                  width: MediaQuery.of(context).size.width,
+                                                  fit: BoxFit.cover,
                                                 ),
+                                                margin: EdgeInsets.only(
+                                                    right: 15.0, left: 15.0, top: 15.0),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(right: 20.0),
-                                              child: Align(
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 20.0, top: 5.0),
+                                                child: Align(
                                                   alignment: Alignment.topRight,
                                                   child: Text(
-                                                    snapshot.data[index].desc,
-                                                    style: TextStyle(fontSize: 12.0),
-                                                  )),
-                                            ),
-                                            Align(
-                                              alignment: Alignment.topRight,
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                children: <Widget>[
-                                                  Padding(
-                                                    padding:
-                                                    const EdgeInsets.only(right: 3.0),
-                                                    child: Text(
-                                                      'صنف',
-                                                      style: TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12.0),
-                                                    ),
+                                                    snapshot.data[index].title,
+                                                    style: TextStyle(
+                                                        fontFamily: 'thesansbold',
+                                                        fontSize: 13.0,
+                                                        color: Colors.black),
                                                   ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        right: 20.0),
-                                                    child: Text(
-                                                      '22',
-                                                      style: TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12.0),
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
-                                            )
-                                          ],
+                                              Padding(
+                                                padding: const EdgeInsets.only(right: 20.0),
+                                                child: Align(
+                                                    alignment: Alignment.topRight,
+                                                    child: Text(
+                                                      snapshot.data[index].desc,
+                                                      style: TextStyle(fontSize: 12.0),
+                                                    )),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.topRight,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  children: <Widget>[
+                                                    Padding(
+                                                      padding:
+                                                      const EdgeInsets.only(right: 3.0),
+                                                      child: Text(
+                                                        'صنف',
+                                                        style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12.0),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(
+                                                          right: 20.0),
+                                                      child: Text(
+                                                        '22',
+                                                        style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12.0),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ));
+                                      )),
+                                );
                               }),
                             ),
                           ),

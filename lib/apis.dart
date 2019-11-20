@@ -8,5 +8,8 @@ class apis {
 
   static String categories='${rosto}Category/getAllMainCategories/${userName}/${password}/';
 
+  static String products='${rosto}Category/getCategoryProducutByBranchId/${userName}/${password}/';
+
+
 
 }
