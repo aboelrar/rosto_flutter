@@ -5,6 +5,7 @@ import 'package:rosto_f/categories.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:rosto_f/categories_list.dart';
+import 'package:rosto_f/product_details.dart';
 import 'package:rosto_f/product_list.dart';
 
 class products extends StatefulWidget {
@@ -92,6 +93,17 @@ class products_state extends State<products> {
                             itemCount: 1
                             , itemBuilder: (BuildContext context, index) {
                           return GestureDetector(
+
+                            onTap: ()
+                            {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (BuildContext context)
+                                  {
+                                    return product_details();
+                                  }
+                              ));
+                            },
+
                             child: Container(
                               width: MediaQuery
                                   .of(context)
