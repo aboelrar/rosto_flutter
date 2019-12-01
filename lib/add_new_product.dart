@@ -35,6 +35,18 @@ class add_new_product {
     return insert;
   }
 
+  Future<List> getData() async{
+    var db_products =await db;
+    return await db_products.query(table);
+  }
+
+  //DELETE
+  Future<int> delete(int id) async{
+    var dbclient = await db;
+    int delete = await dbclient.rawUpdate('DELETE FROM $table where id ="$id" ');
+    return delete;
+  }
+
 
 
 }

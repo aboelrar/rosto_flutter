@@ -27,6 +27,8 @@ dependencies:
   sqflite: ^1.1.7+2
   path_provider: ^1.4.4
   toast: ^0.1.5
+  progress_dialog: ^1.2.0
+  shared_preferences: ^0.5.3
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +50,8 @@ flutter:
       - image/topimage.png
       - image/rostologo.png
       - image/dishes.jpg
+      - image/error.png
+      - image/splash.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

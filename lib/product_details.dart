@@ -267,6 +267,10 @@ class product_state extends State<product_details> {
                                 ),
                                 GestureDetector(
                                   onTap: () async {
+                                    String price_str=snapshot.data[0].price;
+                                    int priceint=int.parse(price_str);
+                                    int totalPrice=priceint*quantity;
+
                                     int add = await add_new_product().create({
                                       'name': snapshot.data[0].name,
                                       'description':
@@ -274,7 +278,7 @@ class product_state extends State<product_details> {
                                       'size':snapshot.data[0].size,
                                       'quantity':'${quantity}',
                                       'product_id':snapshot.data[0].id,
-                                      'price':snapshot.data[0].price,
+                                      'price':totalPrice,
                                       'size_id':"1"
                                     });
                                     print(add);

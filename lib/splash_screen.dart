@@ -4,6 +4,8 @@
 import 'package:flutter/material.dart';
 import 'package:rosto_f/HomeScreen.dart';
 
+import 'login.dart';
+
 class splash_screen extends StatefulWidget
 {
   @override
@@ -36,7 +38,7 @@ class splash_state extends State<splash_screen>{
     Timer(
         Duration(seconds: 3),
             () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => HomeScreen())));
+            builder: (BuildContext context) => login())));
   }
 
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rosto_f/splash_screen.dart';
 
+import 'login.dart';
+
 void main()
 {
   return runApp(new MaterialApp(
@@ -11,6 +13,7 @@ void main()
        * HERE DEFINE ALL PAGES SOMETHING LIKE MANIFIEST IN ANDROID ALL PAGES MUST WRITTING HERE
        */
       'splash_screen':(context)=>splash_screen(),
+      'login':(context)=>login(),
     },
   ));
 }
