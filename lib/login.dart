@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
+import 'package:rosto_f/saved_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -45,6 +46,8 @@ class login_state extends State<login> {
             color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
     );
     pr.show();
+
+
     final paramDic = {
       "mail": email,
       "password": pass,
@@ -60,8 +63,10 @@ class login_state extends State<login> {
         {
           pr.dismiss();
           Toast.show("تم الدخول بنجاح", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-          map.addAll(data);
-          Navigator.push(context, MaterialPageRoute(
+          map.addAll(data['user_data']);
+          save_user_data(map['id']);
+
+          Navigator.pushReplacement(context, MaterialPageRoute(
               builder: (BuildContext context)
               {
                 return HomeScreen();
@@ -81,7 +86,31 @@ class login_state extends State<login> {
     }
   }
 
-   //SOMETHING LIKE ID USING TO GET TEXT FROM FIELD
+
+  @override
+  void initState() {
+    getdata();
+  }
+
+  getdata()
+  async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+     bool login_status= prefs.getBool("status");
+     if(login_status==true)
+       {
+         Navigator.pushReplacement(context, MaterialPageRoute(
+             builder: (context)
+             {
+               return HomeScreen();
+             }
+         ));
+       }
+
+    });
+  }
+
+  //SOMETHING LIKE ID USING TO GET TEXT FROM FIELD
   TextEditingController emailController = new TextEditingController();
   TextEditingController passController = new TextEditingController();
 
@@ -113,7 +142,7 @@ class login_state extends State<login> {
                   text_field('كلمة السر',passController,true),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only(top: 20.0, right: 40.0, left: 40.0),
+                    margin: EdgeInsets.only(top: 40.0, right: 40.0, left: 40.0),
                     height: 40.0,
                     child: FlatButton(
                       color: Colors.white,

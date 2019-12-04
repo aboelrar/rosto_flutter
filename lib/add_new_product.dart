@@ -47,6 +47,12 @@ class add_new_product {
     return delete;
   }
 
+  Future<int> deleteAll() async{
+    var dbclient = await db;
+    int delete = await dbclient.delete(table);
+    return delete;
+  }
+
 
 
 }

@@ -1,7 +1,7 @@
 class home_list{
-   String _id,_name,_descripition;
+   String _id,_name,_descripition,_phone;
 
-   home_list(this._id, this._name, this._descripition);
+   home_list(this._id, this._name, this._descripition,this._phone);
 
    get descripition => _descripition;
 
@@ -19,6 +19,12 @@ class home_list{
 
    set id(String value) {
      _id = value;
+   }
+
+   get phone => _phone;
+
+   set phone(value) {
+     _phone = value;
    }
 
 

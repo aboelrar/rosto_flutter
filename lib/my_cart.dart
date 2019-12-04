@@ -92,7 +92,7 @@ class mycart_state extends State<mycart> {
                 padding: EdgeInsets.all(8.0),
                 splashColor: Colors.blueAccent,
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
+                  Navigator.pushReplacement(context, MaterialPageRoute(
                     builder: (context)
                         {
                           return personal_information();
@@ -123,6 +123,7 @@ class mycart_state extends State<mycart> {
             child: ListView.builder(
               itemBuilder: (context, index) {
                 return Container(
+                  margin: EdgeInsets.only(top: 5.0),
                   width: MediaQuery.of(context).size.width,
                   child: Row(
 //                  mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -77,28 +77,40 @@ class product_state extends State<product_details> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          Container(
+            height: 150,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("image/topimage.png"), fit: BoxFit.cover),
+            ),
+          ),
           FutureBuilder(
               future: get_data(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) {
-                  return Text('Loading....');
+                  return Center(
+                    child: SizedBox(
+                      child: CircularProgressIndicator(
+                        valueColor: new AlwaysStoppedAnimation<Color>(
+                            Colors.deepOrange),
+                      ),
+                      height: 50.0,
+                      width: 50.0,
+                    ),
+                  );
                 } else {
                   int total_price =
                       int.parse(snapshot.data[0].price) * quantity;
 
                   return Container(
+                    margin: EdgeInsets.only(top: 160),
                     child: Column(
                       children: <Widget>[
-                        Container(
-                          height: 150,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("image/topimage.png"),
-                                fit: BoxFit.cover),
-                          ),
-                        ),
                         Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
                           elevation: 5.0,
                           margin: EdgeInsets.only(
                               top: 20.0, right: 20.0, left: 20.0),
@@ -267,31 +279,30 @@ class product_state extends State<product_details> {
                                 ),
                                 GestureDetector(
                                   onTap: () async {
-                                    String price_str=snapshot.data[0].price;
-                                    int priceint=int.parse(price_str);
-                                    int totalPrice=priceint*quantity;
+                                    String price_str = snapshot.data[0].price;
+                                    int priceint = int.parse(price_str);
+                                    int totalPrice = priceint * quantity;
 
                                     int add = await add_new_product().create({
                                       'name': snapshot.data[0].name,
                                       'description':
                                           snapshot.data[0].descripition,
-                                      'size':snapshot.data[0].size,
-                                      'quantity':'${quantity}',
-                                      'product_id':snapshot.data[0].id,
-                                      'price':totalPrice,
-                                      'size_id':"1"
+                                      'size': snapshot.data[0].size,
+                                      'quantity': '${quantity}',
+                                      'product_id': snapshot.data[0].id,
+                                      'price': totalPrice,
+                                      'size_id': "1"
                                     });
                                     print(add);
-                                    if(add>=1)
-                                      {
-                                        Toast.show("Added Successfully", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-                                        Navigator.push(context, MaterialPageRoute(
-                                            builder: (BuildContext context)
-                                            {
-                                              return mycart();
-                                            }
-                                        ));
-                                      }
+                                    if (add >= 1) {
+                                      Toast.show("Added Successfully", context,
+                                          duration: Toast.LENGTH_SHORT,
+                                          gravity: Toast.BOTTOM);
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: (BuildContext context) {
+                                        return mycart();
+                                      }));
+                                    }
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(top: 10.0),
