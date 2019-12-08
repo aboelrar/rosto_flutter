@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rosto_f/apis.dart';
 import 'package:rosto_f/categories.dart';
 import 'package:rosto_f/home_list.dart';
@@ -27,7 +28,7 @@ class homestate extends State<HomeScreen> {
   Map map = new Map();
   Map branchess = new Map();
 
-  static int get selectedPos => null;
+  static int get Pos => 2;
 
   Future<List<home_list>> getData() async {
     var response = await http.get(apis.branshes);
@@ -37,8 +38,8 @@ class homestate extends State<HomeScreen> {
       if (map['status'] == 1) {
         for (int index = 0; index < map.length; index++) {
           branchess.addAll(map['branches'][index]);
-          mylist.add(new home_list(
-              branchess['id'], branchess['name'], branchess['address'],branchess['phone']));
+          mylist.add(new home_list(branchess['id'], branchess['name'],
+              branchess['address'], branchess['phone']));
         }
       }
     }
@@ -59,11 +60,16 @@ class homestate extends State<HomeScreen> {
   }
 
   List<TabItem> tabItems = List.of([
-    new TabItem(Icons.person, "انا", Colors.deepOrange, labelStyle: TextStyle(fontWeight: FontWeight.normal,color: Colors.deepOrange)),
-    new TabItem(Icons.shopping_cart, "الطلبات", Colors.deepOrange, labelStyle: TextStyle(fontWeight: FontWeight.normal,color: Colors.deepOrange)),
-    new TabItem(Icons.flag, "الفروع", Colors.deepOrange,labelStyle: TextStyle(fontWeight: FontWeight.normal,color: Colors.deepOrange)),
+    new TabItem(Icons.person, "انا", Colors.deepOrange,
+        labelStyle:
+            TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
+    new TabItem(Icons.shopping_cart, "الطلبات", Colors.deepOrange,
+        labelStyle:
+            TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
+    new TabItem(Icons.flag, "الفروع", Colors.deepOrange,
+        labelStyle:
+            TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
   ]);
-
 
   //PRESSED ON TABLIST
   void pressed_list(String id) {
@@ -116,12 +122,20 @@ class homestate extends State<HomeScreen> {
                 if (snapshot.data == null) {
                   return Center(
                     child: SizedBox(
-                      child: CircularProgressIndicator(
-                        valueColor: new AlwaysStoppedAnimation<Color>(
-                            Colors.deepOrange),
+                      child: CircularPercentIndicator(
+                        radius: 90.0,
+                        lineWidth: 8.0,
+                        percent: 1.0,
+                        center: new Text(
+                          "انتظر...",
+                          style: TextStyle(fontSize: 12, color: Colors.black,fontFamily: 'thesansbold'),
+                        ),
+                        progressColor: Colors.orange,
+                        backgroundColor: Colors.deepOrange,
+                        animation: true,
+                        animationDuration: 1700,
+                        circularStrokeCap: CircularStrokeCap.round,
                       ),
-                      height: 50.0,
-                      width: 50.0,
                     ),
                   );
                 } else {
@@ -185,15 +199,15 @@ class homestate extends State<HomeScreen> {
                                                       ),
                                                     ),
                                                     Transform.translate(
-                                                      offset: Offset(0,13),
+                                                      offset: Offset(0, 13),
                                                       child: Text(
-                                                        snapshot.data[index]
-                                                            .phone,
+                                                        snapshot
+                                                            .data[index].phone,
                                                         style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 13.0),
-                                                        overflow:
-                                                            TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         maxLines: 1,
                                                       ),
                                                     )
@@ -249,9 +263,7 @@ class homestate extends State<HomeScreen> {
   }
 
   CircularBottomNavigationController _navigationController =
-  new CircularBottomNavigationController(selectedPos);
-
-
+      new CircularBottomNavigationController(2);
 
   @override
   Widget build(BuildContext context) {
@@ -260,17 +272,16 @@ class homestate extends State<HomeScreen> {
     int latest = _navigationController.value;
     // TODO: implement build
     return Scaffold(
-      body: _list()[index],
-      bottomNavigationBar:
-      CircularBottomNavigation(
-        tabItems,
-        controller: _navigationController,
-        selectedCallback: (int selectedPos) {
-          print("clicked on $selectedPos");
-        },
-      )
+        body: _list()[index],
+        bottomNavigationBar: CircularBottomNavigation(
+          tabItems,
+          controller: _navigationController,
+          selectedCallback: (int selectedPos) {
+            print("clicked on $selectedPos");
+          },
+        )
 
-      /* BottomNavigationBar(
+        /* BottomNavigationBar(
         currentIndex: index,
         onTap: change_index_bottom,
         type: BottomNavigationBarType.fixed,
@@ -291,7 +302,7 @@ class homestate extends State<HomeScreen> {
           ),
         ],
       ),*/
-    );
+        );
   }
 
   save_user_data(String id) async {

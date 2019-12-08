@@ -1,3 +1,5 @@
+import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
+import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rosto_f/personal_information.dart';
@@ -14,6 +16,8 @@ class mycart extends StatefulWidget {
 
 class mycart_state extends State<mycart> {
   List data = new List();
+
+  static int get selectedPos => 1;
 
 //GETdATA
   void getData() async {
@@ -39,6 +43,21 @@ class mycart_state extends State<mycart> {
     String price = total_price.toString();
     return price;
   }
+
+  List<TabItem> tabItems = List.of([
+    new TabItem(Icons.person, "انا", Colors.deepOrange,
+        labelStyle:
+        TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
+    new TabItem(Icons.shopping_cart, "الطلبات", Colors.deepOrange,
+        labelStyle:
+        TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
+    new TabItem(Icons.flag, "الفروع", Colors.deepOrange,
+        labelStyle:
+        TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
+  ]);
+
+  CircularBottomNavigationController _navigationController =
+  new CircularBottomNavigationController(selectedPos);
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +127,14 @@ class mycart_state extends State<mycart> {
           ],
         ),
       ),
+      bottomNavigationBar: CircularBottomNavigation(
+        tabItems,
+        controller: _navigationController,
+        selectedCallback: (int selectedPos) {
+          print("clicked on $selectedPos");
+        },
+      ),
+
     );
   }
 

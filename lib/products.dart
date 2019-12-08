@@ -1,5 +1,8 @@
+import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
+import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rosto_f/apis.dart';
 import 'package:rosto_f/categories.dart';
 import 'dart:convert' as convert;
@@ -22,6 +25,8 @@ class products_state extends State<products> {
   Map map = new Map();
   Map map_list = new Map();
 
+  static int get selectedPos => 2;
+
   //GET CATEGORIES DATA
   Future<List<product_list>> get_data() async {
     var response = await http.get(
@@ -41,6 +46,22 @@ class products_state extends State<products> {
     }
     return mylist;
   }
+
+  List<TabItem> tabItems = List.of([
+    new TabItem(Icons.person, "انا", Colors.deepOrange,
+        labelStyle:
+        TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
+    new TabItem(Icons.shopping_cart, "الطلبات", Colors.deepOrange,
+        labelStyle:
+        TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
+    new TabItem(Icons.flag, "الفروع", Colors.deepOrange,
+        labelStyle:
+        TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
+  ]);
+
+  CircularBottomNavigationController _navigationController =
+  new CircularBottomNavigationController(selectedPos);
+
 
   @override
   Widget build(BuildContext context) {
@@ -83,12 +104,20 @@ class products_state extends State<products> {
               if (snapshot.data == null) {
                 return Center(
                   child: SizedBox(
-                    child: CircularProgressIndicator(
-                      valueColor:
-                          new AlwaysStoppedAnimation<Color>(Colors.deepOrange),
+                    child: CircularPercentIndicator(
+                      radius: 90.0,
+                      lineWidth: 8.0,
+                      percent: 1.0,
+                      center: new Text(
+                        "انتظر...",
+                        style: TextStyle(fontSize: 12, color: Colors.black,fontFamily: 'thesansbold'),
+                      ),
+                      progressColor: Colors.orange,
+                      backgroundColor: Colors.deepOrange,
+                      animation: true,
+                      animationDuration: 1700,
+                      circularStrokeCap: CircularStrokeCap.round,
                     ),
-                    height: 50.0,
-                    width: 50.0,
                   ),
                 );
               } else {
@@ -205,6 +234,22 @@ class products_state extends State<products> {
                                               width: 80,
                                               height: 80,
                                               fit: BoxFit.cover,
+                                              loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+                                                if (loadingProgress == null) return child;
+                                                return Container(
+                                                  height: 80.0,
+                                                  width: 80.0,
+                                                  child: Center(
+                                                    child: CircularProgressIndicator(
+                                                      valueColor: new AlwaysStoppedAnimation<Color>(Colors.deepOrange),
+                                                      backgroundColor: Colors.grey,
+                                                      value: loadingProgress.expectedTotalBytes != null ?
+                                                      loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+                                                          : null,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
                                             ),
                                             flex: 2,
                                           )
@@ -224,6 +269,13 @@ class products_state extends State<products> {
           )
         ],
       ),
+        bottomNavigationBar: CircularBottomNavigation(
+          tabItems,
+          controller: _navigationController,
+          selectedCallback: (int selectedPos) {
+            print("clicked on $selectedPos");
+          },
+        )
     );
   }
 }
