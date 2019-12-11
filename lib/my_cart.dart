@@ -2,7 +2,10 @@ import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rosto_f/HomeScreen.dart';
+import 'package:rosto_f/categories.dart';
 import 'package:rosto_f/personal_information.dart';
+import 'package:rosto_f/settings.dart';
 import 'add_new_product.dart';
 import 'package:toast/toast.dart';
 
@@ -47,17 +50,34 @@ class mycart_state extends State<mycart> {
   List<TabItem> tabItems = List.of([
     new TabItem(Icons.person, "انا", Colors.deepOrange,
         labelStyle:
-        TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
+            TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
     new TabItem(Icons.shopping_cart, "الطلبات", Colors.deepOrange,
         labelStyle:
-        TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
+            TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
     new TabItem(Icons.flag, "الفروع", Colors.deepOrange,
         labelStyle:
-        TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
+            TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange)),
   ]);
 
   CircularBottomNavigationController _navigationController =
-  new CircularBottomNavigationController(selectedPos);
+      new CircularBottomNavigationController(selectedPos);
+
+  //Bottom Navigation
+  void bottom_nav(position) {
+    if (position == 2) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return HomeScreen();
+          }));
+
+    } else if (position == 0) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return settings();
+          }));
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -91,38 +111,31 @@ class mycart_state extends State<mycart> {
                 padding: EdgeInsets.all(8.0),
                 splashColor: Colors.blueAccent,
                 onPressed: () {
-                  /*...*/
+                  if(data.length==0)
+                  {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return HomeScreen();
+                        }));
+                  }
+                  else{
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return categories(null);
+                        }));
+                  }
                 },
-                child: Text(
-                  "اضافة طلب",
-                  style: TextStyle(fontSize: 13.0, fontFamily: 'thesansbold'),
+                  child: Text(
+                    "اضافة طلب",
+                    style: TextStyle(fontSize: 13.0, fontFamily: 'thesansbold'),
+                  ),
                 ),
               ),
-            ),
             Container(
               margin: EdgeInsets.only(top: 10),
               width: 150.0,
               height: 40.0,
-              child: FlatButton(
-                color: Colors.deepOrange,
-                textColor: Colors.white,
-                disabledColor: Colors.grey,
-                disabledTextColor: Colors.black,
-                padding: EdgeInsets.all(8.0),
-                splashColor: Colors.blueAccent,
-                onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (context)
-                        {
-                          return personal_information();
-                        }
-                  ));
-                },
-                child: Text(
-                  "متابعة لانهاء الطلب",
-                  style: TextStyle(fontSize: 13.0, fontFamily: 'thesansbold'),
-                ),
-              ),
+              child: finish_order(),
             )
           ],
         ),
@@ -130,11 +143,11 @@ class mycart_state extends State<mycart> {
       bottomNavigationBar: CircularBottomNavigation(
         tabItems,
         controller: _navigationController,
+        barHeight: 50.0,
         selectedCallback: (int selectedPos) {
-          print("clicked on $selectedPos");
+          bottom_nav(selectedPos);
         },
       ),
-
     );
   }
 
@@ -268,7 +281,17 @@ class mycart_state extends State<mycart> {
         ),
       );
     } else {
-      return Card();
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: 150.0,
+        child: Center(
+          child: Text(
+            'لاتوجد طلبات',
+            style: TextStyle(
+                fontFamily: 'thesansbold', fontSize: 15.0, color: Colors.black),
+          ),
+        ),
+      );
     }
   }
 
@@ -307,6 +330,35 @@ class mycart_state extends State<mycart> {
       return Container(
         height: 0,
         width: 0,
+      );
+    }
+  }
+
+  //BUTTON COMPLETE TO FINISH ORDER
+  Widget finish_order() {
+    if (data.length == 0) {
+      return Container(
+        width: 0.0,
+        height: 0.0,
+      );
+    } else {
+      return FlatButton(
+        color: Colors.deepOrange,
+        textColor: Colors.white,
+        disabledColor: Colors.grey,
+        disabledTextColor: Colors.black,
+        padding: EdgeInsets.all(8.0),
+        splashColor: Colors.blueAccent,
+        onPressed: () {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) {
+            return personal_information();
+          }));
+        },
+        child: Text(
+          "متابعة لانهاء الطلب",
+          style: TextStyle(fontSize: 13.0, fontFamily: 'thesansbold'),
+        ),
       );
     }
   }

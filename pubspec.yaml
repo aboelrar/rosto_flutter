@@ -54,6 +54,11 @@ flutter:
       - image/dishes.jpg
       - image/error.png
       - image/splash.png
+      - image/chicken.jpg
+      - image/loadingpic.png
+      - image/nextone.png
+      - image/test.png
+      - image/client.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

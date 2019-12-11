@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rosto_f/product_details_list.dart';
 import 'package:toast/toast.dart';
 import 'add_new_product.dart';
@@ -71,10 +72,17 @@ class product_state extends State<product_details> {
     return mylist;
   }
 
+
+  @override
+  void initState() {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
           Container(
@@ -91,12 +99,17 @@ class product_state extends State<product_details> {
                 if (snapshot.data == null) {
                   return Center(
                     child: SizedBox(
-                      child: CircularProgressIndicator(
-                        valueColor: new AlwaysStoppedAnimation<Color>(
-                            Colors.deepOrange),
+                      child: CircularPercentIndicator(
+                        radius: 90.0,
+                        lineWidth: 8.0,
+                        percent: 1.0,
+                        center: Image.asset('image/loadingpic.png',width: 40.0,height: 40.0,),
+                        progressColor: Colors.orange,
+                        backgroundColor: Colors.deepOrange,
+                        animation: true,
+                        animationDuration: 1700,
+                        circularStrokeCap: CircularStrokeCap.round,
                       ),
-                      height: 50.0,
-                      width: 50.0,
                     ),
                   );
                 } else {
@@ -328,7 +341,31 @@ class product_state extends State<product_details> {
                     ),
                   );
                 }
-              })
+              }),
+          Positioned(
+            top: 120.0,
+            left: 20.0,
+            child: Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50.0),
+                child: Container(
+                    width: 100.0,
+                    height: 100.0,
+                    padding: EdgeInsets.all(10),
+                    color: Colors.white,
+                    alignment: Alignment.center,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(50.0),
+                      child: Image.asset(
+                        'image/chicken.jpg',
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      ),
+                    )),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -8,8 +8,10 @@ import 'package:rosto_f/categories.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:rosto_f/categories_list.dart';
+import 'package:rosto_f/my_cart.dart';
 import 'package:rosto_f/product_details.dart';
 import 'package:rosto_f/product_list.dart';
+import 'package:rosto_f/settings.dart';
 
 class products extends StatefulWidget {
   @override
@@ -62,12 +64,28 @@ class products_state extends State<products> {
   CircularBottomNavigationController _navigationController =
   new CircularBottomNavigationController(selectedPos);
 
+  //Bottom Navigation
+  void bottom_nav(position) {
+    if (position == 1) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return mycart();
+          }));
+
+    } else if (position == 0) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return settings();
+          }));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: Stack(
+        backgroundColor: Colors.white,
+        body: Stack(
         children: <Widget>[
           Container(
             height: 150,
@@ -108,10 +126,7 @@ class products_state extends State<products> {
                       radius: 90.0,
                       lineWidth: 8.0,
                       percent: 1.0,
-                      center: new Text(
-                        "انتظر...",
-                        style: TextStyle(fontSize: 12, color: Colors.black,fontFamily: 'thesansbold'),
-                      ),
+                      center: Image.asset('image/loadingpic.png',width: 40.0,height: 40.0,),
                       progressColor: Colors.orange,
                       backgroundColor: Colors.deepOrange,
                       animation: true,
@@ -234,7 +249,7 @@ class products_state extends State<products> {
                                               width: 80,
                                               height: 80,
                                               fit: BoxFit.cover,
-                                              loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+                                         /*     loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
                                                 if (loadingProgress == null) return child;
                                                 return Container(
                                                   height: 80.0,
@@ -249,7 +264,7 @@ class products_state extends State<products> {
                                                     ),
                                                   ),
                                                 );
-                                              },
+                                              },*/
                                             ),
                                             flex: 2,
                                           )
@@ -266,14 +281,40 @@ class products_state extends State<products> {
                 );
               }
             },
-          )
+          ),
+          Positioned(
+            top: 120.0,
+            left: 20.0,
+            child: Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50.0),
+                child: Container(
+                    width: 100.0,
+                    height: 100.0,
+                    padding: EdgeInsets.all(10),
+                    color: Colors.white,
+                    alignment: Alignment.center,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(50.0),
+                      child: Image.asset(
+                        'image/chicken.jpg',
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      ),
+                    )),
+              ),
+            ),
+          ),
+
         ],
       ),
         bottomNavigationBar: CircularBottomNavigation(
           tabItems,
+          barHeight: 50.0,
           controller: _navigationController,
           selectedCallback: (int selectedPos) {
-            print("clicked on $selectedPos");
+            bottom_nav(selectedPos);
           },
         )
     );

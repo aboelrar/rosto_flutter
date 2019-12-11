@@ -10,7 +10,9 @@ import 'package:rosto_f/categories_list.dart';
 import 'package:rosto_f/categories_list.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
+import 'package:rosto_f/my_cart.dart';
 import 'package:rosto_f/products.dart';
+import 'package:rosto_f/settings.dart';
 
 import 'categories_list.dart';
 
@@ -67,11 +69,27 @@ class categoriesState extends State<categories> {
   CircularBottomNavigationController _navigationController =
   new CircularBottomNavigationController(selectedPos);
 
+  //Bottom Navigation
+  void bottom_nav(position) {
+    if (position == 1) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return mycart();
+          }));
+
+    } else if (position == 0) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return settings();
+          }));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-
+      backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
           Stack(
@@ -145,10 +163,7 @@ class categoriesState extends State<categories> {
                             radius: 90.0,
                             lineWidth: 8.0,
                             percent: 1.0,
-                            center: new Text(
-                              "انتظر...",
-                              style: TextStyle(fontSize: 12, color: Colors.black,fontFamily: 'thesansbold'),
-                            ),
+                            center: Image.asset('image/loadingpic.png',width: 40.0,height: 40.0,),
                             progressColor: Colors.orange,
                             backgroundColor: Colors.deepOrange,
                             animation: true,
@@ -159,7 +174,7 @@ class categoriesState extends State<categories> {
                       );
                     } else {
                       return Container(
-                        margin: EdgeInsets.only(top: 180.0),
+                        margin: EdgeInsets.only(top: 200.0),
                         child: Column(children: <Widget>[
                           Expanded(
                             child: Padding(
@@ -199,7 +214,7 @@ class categoriesState extends State<categories> {
                                                         .size
                                                         .width,
                                                     fit: BoxFit.cover,
-                                                    loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+                                                  /*  loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
                                                       if (loadingProgress == null) return child;
                                                       return Container(
                                                         height: 100.0,
@@ -213,7 +228,7 @@ class categoriesState extends State<categories> {
                                                           ),
                                                         ),
                                                       );
-                                                    },
+                                                    },*/
                                                   ),
                                                 ),
                                               ),
@@ -289,18 +304,27 @@ class categoriesState extends State<categories> {
                   }),
               Positioned(
                 top: 120.0,
-                child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    alignment: Alignment.center,
-                    child: ClipRRect(
-                      borderRadius: new BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'image/dishes.jpg',
-                        width: 60,
-                        height: 50,
-                        fit: BoxFit.cover,
-                      ),
-                    )),
+                left: 20.0,
+                child: Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50.0),
+                    child: Container(
+                        width: 100.0,
+                        height: 100.0,
+                        padding: EdgeInsets.all(10),
+                        color: Colors.white,
+                        alignment: Alignment.center,
+                        child: ClipRRect(
+                          borderRadius: new BorderRadius.circular(50.0),
+                          child: Image.asset(
+                            'image/chicken.jpg',
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        )),
+                  ),
+                ),
               ),
             ],
           )
@@ -309,8 +333,9 @@ class categoriesState extends State<categories> {
       bottomNavigationBar: CircularBottomNavigation(
         tabItems,
         controller: _navigationController,
+        barHeight: 50.0,
         selectedCallback: (int selectedPos) {
-          print("clicked on $selectedPos");
+          bottom_nav(selectedPos);
         },
       ),
 
