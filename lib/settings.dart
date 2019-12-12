@@ -3,8 +3,10 @@ import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rosto_f/HomeScreen.dart';
+import 'package:rosto_f/login.dart';
 import 'package:rosto_f/my_cart.dart';
 import 'package:rosto_f/personal_info_edits.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class settings extends StatefulWidget {
   @override
@@ -309,13 +311,28 @@ class settings_state extends State<settings> {
                     width: MediaQuery.of(context).size.width,
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text(
-                        'تسجيل الخروج',
-                        textDirection: TextDirection.rtl,
-                        style: TextStyle(
-                            fontSize: 13.0,
-                            color: Colors.black,
-                            fontFamily: 'thesansbold'),
+                      child: GestureDetector(
+                        onTap: ()
+                        {
+                          save_user_data();
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (BuildContext context) {
+                                return login();
+                              }));
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Center(
+                            child: Text(
+                              'تسجيل الخروج',
+                              textDirection: TextDirection.rtl,
+                              style: TextStyle(
+                                  fontSize: 13.0,
+                                  color: Colors.black,
+                                  fontFamily: 'thesansbold'),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -337,4 +354,11 @@ class settings_state extends State<settings> {
         )
     );
   }
+
+  save_user_data() async
+  {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("status", false);
+  }
+
 }

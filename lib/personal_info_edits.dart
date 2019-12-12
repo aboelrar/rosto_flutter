@@ -20,7 +20,7 @@ class personal_state extends State<personal_info_edits> {
   Map map_list = new Map();
   static String user_id;
 
-  Future<List<person_list>> get_data() async {
+  Future<List<person_list>> get_datas() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       user_id = prefs.getString("id");
@@ -31,16 +31,14 @@ class personal_state extends State<personal_info_edits> {
     if (response.statusCode == 200) {
       var data = convert.jsonDecode(response.body);
       map.addAll(data);
-      if(map['status']==1)
-        {
-          map_list.addAll(map['user']);
-          mylist.add(person_list(map_list['id'],map_list['name'],map_list['phone'],map_list['mail']));
-        }
-
+      if (map['status'] == 1) {
+        map_list.addAll(map['user']);
+        mylist.add(person_list(map_list['id'], map_list['name'],
+            map_list['phone'], map_list['mail']));
+      }
     }
     return mylist;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -102,94 +100,98 @@ class personal_state extends State<personal_info_edits> {
                             EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
                         margin: EdgeInsets.only(right: 10.0, left: 10.0),
                         child: FutureBuilder(
-                          future: get_data(),
-                          builder: (BuildContext context,AsyncSnapshot snapshot)
-                            {
-                              if(snapshot.data == null )
-                                {
-
-                                  return Card(
-                                    child: Text('${snapshot.data}',style: TextStyle(fontSize: 17,),),
-                                  );
-                                }
-                              else{
-                                return Form(
-                                  child: Column(
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.only(bottom: 13.0),
-                                        child: Container(
-                                          height: 40.0,
-                                          child: TextFormField(
-                                            initialValue: snapshot.data[0].name,
-                                            decoration: InputDecoration(
-                                              suffixIcon: Icon(
-                                                Icons.person,
-                                                size: 25.0,
-                                                color: Colors.black,
-                                              ),
-                                              filled: true,
-                                              fillColor: Colors.white,
-                                              enabledBorder: UnderlineInputBorder(
-                                                borderSide:
-                                                BorderSide(color: Colors.white),
-                                                borderRadius:
-                                                BorderRadius.circular(8.0),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(bottom: 13.0),
-                                        child: Container(
-                                          height: 40.0,
-                                          child: TextFormField(
-                                            initialValue: snapshot.data[0].email,
-                                            decoration: InputDecoration(
-                                              suffixIcon: Icon(
-                                                Icons.email,
-                                                size: 25.0,
-                                                color: Colors.black,
-                                              ),
-                                              filled: true,
-                                              fillColor: Colors.white,
-                                              enabledBorder: UnderlineInputBorder(
-                                                borderSide:
-                                                BorderSide(color: Colors.white),
-                                                borderRadius:
-                                                BorderRadius.circular(8.0),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
+                          future: get_datas(),
+                          builder:
+                              (BuildContext context, AsyncSnapshot snapshot) {
+                            if (snapshot.data == null) {
+                              return Card(
+                                child: Text(
+                                  '${snapshot.data}',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return Form(
+                                child: Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 13.0),
+                                      child: Container(
                                         height: 40.0,
                                         child: TextFormField(
-                                          initialValue: snapshot.data[0].phone,
+                                          initialValue: snapshot.data[0].name,
                                           decoration: InputDecoration(
                                             suffixIcon: Icon(
-                                              Icons.phone,
+                                              Icons.person,
                                               size: 25.0,
                                               color: Colors.black,
                                             ),
                                             filled: true,
                                             fillColor: Colors.white,
                                             enabledBorder: UnderlineInputBorder(
-                                              borderSide:
-                                              BorderSide(color: Colors.white),
-                                              borderRadius: BorderRadius.circular(8.0),
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                );
-                              }
-                              },
-
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 13.0),
+                                      child: Container(
+                                        height: 40.0,
+                                        child: TextFormField(
+                                          initialValue: snapshot.data[0].email,
+                                          decoration: InputDecoration(
+                                            suffixIcon: Icon(
+                                              Icons.email,
+                                              size: 25.0,
+                                              color: Colors.black,
+                                            ),
+                                            filled: true,
+                                            fillColor: Colors.white,
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 40.0,
+                                      child: TextFormField(
+                                        initialValue: snapshot.data[0].phone,
+                                        decoration: InputDecoration(
+                                          suffixIcon: Icon(
+                                            Icons.phone,
+                                            size: 25.0,
+                                            color: Colors.black,
+                                          ),
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          },
                         ),
                       ),
                     ),
