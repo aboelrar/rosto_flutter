@@ -238,7 +238,7 @@ class categoriesState extends State<categories> {
                                             Flexible(
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
-                                                    right: 20.0),
+                                                    right: 20.0,top: 5.0),
                                                 child: Align(
                                                   alignment: Alignment.topRight,
                                                   child: Text(
@@ -255,7 +255,7 @@ class categoriesState extends State<categories> {
                                             Flexible(
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
-                                                    right: 20.0),
+                                                    right: 20.0,top: 5.0),
                                                 child: Align(
                                                     alignment: Alignment.topRight,
                                                     child: Text(
@@ -276,7 +276,7 @@ class categoriesState extends State<categories> {
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
-                                                              right: 3.0,bottom: 3.0),
+                                                              right: 3.0,top:5.0, bottom: 3.0),
                                                       child: Text(
                                                         'صنف',
                                                         style: TextStyle(
