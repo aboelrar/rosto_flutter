@@ -303,36 +303,36 @@ class settings_state extends State<settings> {
                     height: 0.4,
                     color: Colors.black45,
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 12.0),
-                    padding: EdgeInsets.only(right: 5.0),
-                    color: Colors.black12,
-                    height: 35.0,
-                    width: MediaQuery.of(context).size.width,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: GestureDetector(
-                        onTap: ()
-                        {
-                          save_user_data();
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return login();
-                              }));
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Center(
-                            child: Text(
-                              'تسجيل الخروج',
-                              textDirection: TextDirection.rtl,
-                              style: TextStyle(
-                                  fontSize: 13.0,
-                                  color: Colors.black,
-                                  fontFamily: 'thesansbold'),
+                  GestureDetector(
+                    onTap: ()
+                    {
+                      save_user_data();
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                            return login();
+                          }));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 12.0),
+                      padding: EdgeInsets.only(right: 5.0),
+                      color: Colors.black12,
+                      height: 35.0,
+                      width: MediaQuery.of(context).size.width,
+                      child: Align(
+                        alignment: Alignment.center,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Center(
+                              child: Text(
+                                'تسجيل الخروج',
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(
+                                    fontSize: 13.0,
+                                    color: Colors.black,
+                                    fontFamily: 'thesansbold'),
+                              ),
                             ),
                           ),
-                        ),
                       ),
                     ),
                   ),
@@ -359,6 +359,7 @@ class settings_state extends State<settings> {
   {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool("status", false);
+
   }
 
 }

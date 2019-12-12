@@ -179,7 +179,7 @@ class categoriesState extends State<categories> {
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  left: 10.0, right: 10.0),
+                                  left: 5.0, right: 5.0),
                               child: GridView.count(
                                 crossAxisCount: count,
                                 children: List.generate(2, (index) {
@@ -200,94 +200,105 @@ class categoriesState extends State<categories> {
                                         child: Column(
                                           children: <Widget>[
 
-                                           Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 15.0,
-                                                    left: 15.0,
-                                                    top: 15.0),
-                                                child: ClipRRect(
-                                                  borderRadius: new BorderRadius.circular(8.0),
-                                                  child: Image.network(
-                                                    snapshot.data[index].image,
-                                                    height: 100.0,
-                                                    width: MediaQuery.of(context)
-                                                        .size
-                                                        .width,
-                                                    fit: BoxFit.cover,
-                                                  /*  loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
-                                                      if (loadingProgress == null) return child;
-                                                      return Container(
-                                                        height: 100.0,
-                                                        child: Center(
-                                                          child: CircularProgressIndicator(
-                                                            valueColor: new AlwaysStoppedAnimation<Color>(Colors.deepOrange),
-                                                            backgroundColor: Colors.grey,
-                                                            value: loadingProgress.expectedTotalBytes != null ?
-                                                            loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
-                                                                : null,
+                                           Flexible(
+                                             child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      right: 10.0,
+                                                      left: 10.0,
+                                                      top: 10.0),
+                                                  child: ClipRRect(
+                                                    borderRadius: new BorderRadius.circular(8.0),
+                                                    child: Image.network(
+                                                      snapshot.data[index].image,
+                                                      height: 100.0,
+                                                      width: MediaQuery.of(context)
+                                                          .size
+                                                          .width,
+                                                      fit: BoxFit.cover,
+                                                    /*  loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+                                                        if (loadingProgress == null) return child;
+                                                        return Container(
+                                                          height: 100.0,
+                                                          child: Center(
+                                                            child: CircularProgressIndicator(
+                                                              valueColor: new AlwaysStoppedAnimation<Color>(Colors.deepOrange),
+                                                              backgroundColor: Colors.grey,
+                                                              value: loadingProgress.expectedTotalBytes != null ?
+                                                              loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+                                                                  : null,
+                                                            ),
                                                           ),
-                                                        ),
-                                                      );
-                                                    },*/
+                                                        );
+                                                      },*/
+                                                    ),
                                                   ),
-                                                ),
-                                              ),
+                                                ),flex: 5,
+                                           ),
 
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 20.0, top: 5.0),
-                                              child: Align(
-                                                alignment: Alignment.topRight,
-                                                child: Text(
-                                                  snapshot.data[index].title,
-                                                  style: TextStyle(
-                                                      fontFamily: 'thesansbold',
-                                                      fontSize: 13.0,
-                                                      color: Colors.black),
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 20.0),
-                                              child: Align(
+                                            Flexible(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 20.0),
+                                                child: Align(
                                                   alignment: Alignment.topRight,
                                                   child: Text(
-                                                    snapshot.data[index].desc,
+                                                    snapshot.data[index].title,
                                                     style: TextStyle(
-                                                        fontSize: 12.0),
-                                                  )),
-                                            ),
-                                            Align(
-                                              alignment: Alignment.topRight,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: <Widget>[
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 3.0),
-                                                    child: Text(
-                                                      'صنف',
-                                                      style: TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12.0),
-                                                    ),
+                                                        fontFamily: 'thesansbold',
+                                                        fontSize: 13.0,
+                                                        color: Colors.black),
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 20.0),
-                                                    child: Text(
-                                                      '22',
-                                                      style: TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 12.0),
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
+                                              flex: 1,
+                                            ),
+                                            Flexible(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 20.0),
+                                                child: Align(
+                                                    alignment: Alignment.topRight,
+                                                    child: Text(
+                                                      snapshot.data[index].desc,
+                                                      style: TextStyle(
+                                                          fontSize: 12.0),
+                                                    )),
+                                              ),
+                                              flex: 1,
+                                            ),
+                                            Flexible(
+                                              child: Align(
+                                                alignment: Alignment.topRight,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: <Widget>[
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 3.0,bottom: 3.0),
+                                                      child: Text(
+                                                        'صنف',
+                                                        style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12.0),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 20.0),
+                                                      child: Text(
+                                                        '22',
+                                                        style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 12.0),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              flex: 2,
                                             )
                                           ],
                                         ),
