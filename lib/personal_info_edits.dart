@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rosto_f/person_list.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
@@ -104,11 +105,18 @@ class personal_state extends State<personal_info_edits> {
                           builder:
                               (BuildContext context, AsyncSnapshot snapshot) {
                             if (snapshot.data == null) {
-                              return Card(
-                                child: Text(
-                                  '${snapshot.data}',
-                                  style: TextStyle(
-                                    fontSize: 17,
+                              return Center(
+                                child: SizedBox(
+                                  child: CircularPercentIndicator(
+                                    radius: 90.0,
+                                    lineWidth: 8.0,
+                                    percent: 1.0,
+                                    center: Image.asset('image/loadingpic.png',width: 40.0,height: 40.0,),
+                                    progressColor: Colors.orange,
+                                    backgroundColor: Colors.deepOrange,
+                                    animation: true,
+                                    animationDuration: 1700,
+                                    circularStrokeCap: CircularStrokeCap.round,
                                   ),
                                 ),
                               );

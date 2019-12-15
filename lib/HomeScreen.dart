@@ -26,7 +26,6 @@ class HomeScreen extends StatefulWidget {
  * GET DATA FROM SERVER
  */
 class homestate extends State<HomeScreen> {
-
   List data = new List();
 
   static int get selectedPos => 1;
@@ -36,16 +35,15 @@ class homestate extends State<HomeScreen> {
     add_new_product().getData().then((result) {
       setState(() {
         data.addAll(result);
-        if(data.length > 0)
-        {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
+        if (data.length > 0) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (BuildContext context) {
             return categories(null);
           }));
         }
       });
     });
   }
-
 
   List<home_list> mylist = new List<home_list>();
   static List<home_list> home_lists = new List<home_list>();
@@ -72,9 +70,7 @@ class homestate extends State<HomeScreen> {
 
   @override
   void initState() {
-
     getData_sql();
-
   }
 
   List<Widget> _list() {
@@ -120,9 +116,10 @@ class homestate extends State<HomeScreen> {
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("image/test.png",),
+                      image: AssetImage(
+                        "image/test.png",
+                      ),
                       fit: BoxFit.cover,
-
                     ),
                   ),
                   child: Padding(
@@ -142,7 +139,8 @@ class homestate extends State<HomeScreen> {
                       alignment: Alignment.topRight,
                       child: Text(
                         'الفروع',
-                        style: TextStyle(fontSize: 14, fontFamily: "thesansbold"),
+                        style:
+                            TextStyle(fontSize: 14, fontFamily: "thesansbold"),
                       )),
                 ),
                 Expanded(
@@ -179,28 +177,34 @@ class homestate extends State<HomeScreen> {
                                     itemBuilder: (BuildContext context, index) {
                                       return GestureDetector(
                                         onTap: () {
-                                          save_user_data(snapshot.data[index].id);
-                                          Navigator.push(context, MaterialPageRoute(
-                                              builder: (BuildContext context) {
-                                                return categories(snapshot.data[index].id);
-                                              }));
+                                          save_user_data(
+                                              snapshot.data[index].id);
+                                          Navigator.push(context,
+                                              MaterialPageRoute(builder:
+                                                  (BuildContext context) {
+                                            return categories(
+                                                snapshot.data[index].id);
+                                          }));
                                         },
                                         child: Container(
                                           margin: EdgeInsets.only(
                                               right: 20, left: 20, bottom: 10),
                                           child: Card(
                                             shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10.0),
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
                                             ),
                                             elevation: 10,
                                             child: Container(
                                               margin: const EdgeInsets.only(
                                                   right: 10.0, left: 10.0),
                                               height: 100,
-                                              width: MediaQuery.of(context).size.width,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
                                               child: Row(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.end,
+                                                    MainAxisAlignment.end,
                                                 children: <Widget>[
                                                   Flexible(
                                                       child: Container(
@@ -208,38 +212,51 @@ class homestate extends State<HomeScreen> {
                                                             right: 10, top: 14),
                                                         child: Column(
                                                           crossAxisAlignment:
-                                                          CrossAxisAlignment.end,
+                                                              CrossAxisAlignment
+                                                                  .end,
                                                           children: <Widget>[
                                                             Text(
-                                                              snapshot.data[index].name,
+                                                              snapshot
+                                                                  .data[index]
+                                                                  .name,
                                                               style: TextStyle(
                                                                   fontSize: 13,
                                                                   fontFamily:
-                                                                  "thesansbold"),
+                                                                      "thesansbold"),
                                                             ),
                                                             Transform.translate(
-                                                              offset: Offset(0, 13),
+                                                              offset:
+                                                                  Offset(0, 13),
                                                               child: Text(
-                                                                snapshot.data[index]
+                                                                snapshot
+                                                                    .data[index]
                                                                     .descripition,
                                                                 style: TextStyle(
-                                                                    color: Colors.grey,
-                                                                    fontSize: 13.0),
-                                                                overflow: TextOverflow
-                                                                    .ellipsis,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontSize:
+                                                                        13.0),
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
                                                                 maxLines: 1,
                                                               ),
                                                             ),
                                                             Transform.translate(
-                                                              offset: Offset(0, 13),
+                                                              offset:
+                                                                  Offset(0, 13),
                                                               child: Text(
                                                                 snapshot
-                                                                    .data[index].phone,
+                                                                    .data[index]
+                                                                    .phone,
                                                                 style: TextStyle(
-                                                                    color: Colors.grey,
-                                                                    fontSize: 13.0),
-                                                                overflow: TextOverflow
-                                                                    .ellipsis,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontSize:
+                                                                        13.0),
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
                                                                 maxLines: 1,
                                                               ),
                                                             )
@@ -250,7 +267,8 @@ class homestate extends State<HomeScreen> {
                                                   Flexible(
                                                     child: ClipRRect(
                                                       borderRadius:
-                                                      BorderRadius.circular(8.0),
+                                                          BorderRadius.circular(
+                                                              8.0),
                                                       child: Image.asset(
                                                         'image/topimage.png',
                                                         width: 75,
@@ -315,7 +333,6 @@ class homestate extends State<HomeScreen> {
           MaterialPageRoute(builder: (BuildContext context) {
         return mycart();
       }));
-
     } else if (position == 0) {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) {
@@ -357,8 +374,7 @@ class homestate extends State<HomeScreen> {
           },
         )
 
-
-      /* BottomNavigationBar(
+        /* BottomNavigationBar(
         currentIndex: index,
         onTap: change_index_bottom,
         type: BottomNavigationBarType.fixed,

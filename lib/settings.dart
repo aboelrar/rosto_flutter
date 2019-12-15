@@ -8,6 +8,8 @@ import 'package:rosto_f/my_cart.dart';
 import 'package:rosto_f/personal_info_edits.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'add_new_product.dart';
+
 class settings extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -306,6 +308,8 @@ class settings_state extends State<settings> {
                   GestureDetector(
                     onTap: ()
                     {
+                      add_new_product addNewProduct=new add_new_product();
+                      addNewProduct.deleteAll();
                       save_user_data();
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (BuildContext context) {

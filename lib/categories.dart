@@ -234,11 +234,13 @@ class categoriesState extends State<categories> {
                                                   ),
                                                 ),flex: 5,
                                            ),
-
+                                            Container(
+                                              margin: EdgeInsets.only(top: 5.0),
+                                            ),
                                             Flexible(
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
-                                                    right: 20.0,top: 5.0),
+                                                    right: 20.0),
                                                 child: Align(
                                                   alignment: Alignment.topRight,
                                                   child: Text(
@@ -252,10 +254,13 @@ class categoriesState extends State<categories> {
                                               ),
                                               flex: 1,
                                             ),
+                                            Container(
+                                              margin: EdgeInsets.only(top: 5.0),
+                                            ),
                                             Flexible(
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
-                                                    right: 20.0,top: 5.0),
+                                                    right: 20.0),
                                                 child: Align(
                                                     alignment: Alignment.topRight,
                                                     child: Text(
