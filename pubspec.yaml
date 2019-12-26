@@ -31,7 +31,7 @@ dependencies:
   shared_preferences: ^0.5.3
   percent_indicator: ^2.1.1
   circular_bottom_navigation: ^1.0.1
-  connectivity: ^0.4.6
+  connectivity: ^0.4.2
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +60,9 @@ flutter:
       - image/nextone.png
       - image/test.png
       - image/client.png
+      - image/header.png
+      - image/wave.png
+      - image/rostobg2.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

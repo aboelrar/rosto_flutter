@@ -128,52 +128,83 @@ class login_state extends State<login> {
               height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("image/splash.png"),
+                  image: AssetImage("image/rostobg2.png"),
                   fit: BoxFit.cover,
                 ),
               ),
               child: Column(
                 children: <Widget>[
-                  Image.asset(
-                    'image/rostologo.png',
-                    width: 200.0,
-                    height: 150.0,
-                  ),
-                  text_field('الاسم',emailController,false),
-                  text_field('كلمة السر',passController,true),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only(top: 40.0, right: 40.0, left: 40.0),
-                    height: 40.0,
-                    child: FlatButton(
-                      color: Colors.white,
-                      textColor: Colors.white,
-                      disabledColor: Colors.white,
-                      disabledTextColor: Colors.black,
-                      padding: EdgeInsets.all(8.0),
-                      splashColor: Colors.blueAccent,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.white)),
-                      child: Text(
-                        "تسجيل الدخول",
-                        style:
-                            TextStyle(fontSize: 13.0, fontFamily: 'thesansbold',color: Colors.black),
-                      ),
-                      onPressed: ()
-                      {
-                        if(key.currentState.validate())
-                          {
-                            setState(() {
-                              callWebServiceForLofinUser(emailController.text,passController.text);
-                            });
-                          }
-                      },
+                  Padding(
+                    padding: const EdgeInsets.only(top: 55.0),
+                    child: Image.asset(
+                      'image/rostologo.png',
+                      width: 200.0,
+                      height: 150.0,
                     ),
                   ),
+                   Card(
+                     margin: EdgeInsets.only(right:20.0,left: 20.0),
+                     elevation: 10.0,
+
+                     child: Container(
+                       height: 350.0,
+                       child: Column(
+                         children: <Widget>[
+                           Padding(
+                             padding: const EdgeInsets.only(top:8.0),
+                             child: Text('مرحبا',style: TextStyle(color: Colors.black,fontSize: 20.0,fontFamily: 'thesansbold'),),
+                           ),
+                            Text('تسجيل الدخول للحساب',style: TextStyle(color: Colors.black,fontSize: 14.0,fontFamily: 'thesansbold'),),
+                           text_field('الاسم',emailController,false),
+                           text_field('كلمة السر',passController,true),
+                           Padding(
+                             padding: const EdgeInsets.only(top:30.0,right: 35.0),
+                             child: Align(
+                               alignment: Alignment.topRight,
+                               child: Text(
+                                 'نسيت كلمة السر؟',
+                                 style: TextStyle(color: Colors.grey, fontSize: 13,fontFamily: 'thesansbold'),textDirection: TextDirection.rtl,
+                               ),
+                             ),
+                           ),
+                           Container(
+                             width: MediaQuery.of(context).size.width,
+                             margin: EdgeInsets.only(top: 55.0, right: 80.0, left: 80.0),
+                             height: 40.0,
+                             child: FlatButton(
+                               color: Colors.white,
+                               textColor: Colors.white,
+                               disabledColor: Colors.white,
+                               disabledTextColor: Colors.black,
+                               padding: EdgeInsets.all(8.0),
+                               splashColor: Colors.blueAccent,
+                               shape: RoundedRectangleBorder(
+                                   borderRadius: new BorderRadius.circular(18.0),
+                                   side: BorderSide(color: Colors.deepOrange)),
+                               child: Text(
+                                 "تسجيل الدخول",
+                                 style:
+                                 TextStyle(fontSize: 13.0, fontFamily: 'thesansbold',color: Colors.black),
+                               ),
+                               onPressed: ()
+                               {
+                                 if(key.currentState.validate())
+                                 {
+                                   setState(() {
+                                     callWebServiceForLofinUser(emailController.text,passController.text);
+                                   });
+                                 }
+                               },
+                             ),
+                           ),
+                         ],
+                       ),
+                     ),
+                   )
+                ,
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only(top: 20.0, right: 40.0, left: 40.0,),
+                    margin: EdgeInsets.only(top: 40.0, right: 40.0, left: 40.0,),
                     child: Row(
                       textDirection: TextDirection.rtl,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -193,10 +224,7 @@ class login_state extends State<login> {
                             style: TextStyle(color: Colors.white, fontSize: 13,fontFamily: 'thesansbold'),
                           ),
                         ),
-                        Text(
-                          'نسيت كلمة السر؟',
-                          style: TextStyle(color: Colors.white, fontSize: 13,fontFamily: 'thesansbold'),
-                        )
+
                       ],
                     ),
                   )
@@ -212,7 +240,7 @@ class login_state extends State<login> {
   Widget text_field(String txt_n,var con_name,bool status ) {
     final theme = Theme.of(context);
     return Container(
-      margin: EdgeInsets.only(top: 40.0, right: 40, left: 40.0),
+      margin: EdgeInsets.only(top: 30.0, right: 40, left: 40.0),
       height: 30.0,
       child: Theme(
         data: theme.copyWith(primaryColor: Colors.white),
@@ -234,10 +262,10 @@ class login_state extends State<login> {
           decoration: InputDecoration(
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                color: Colors.white,
+                color: Colors.grey,
               )),
               hintText: txt_n,
-              hintStyle: TextStyle(color: Colors.white, fontSize: 13.0)),
+              hintStyle: TextStyle(color: Colors.black, fontSize: 13.0)),
         ),
       ),
     );

@@ -117,7 +117,7 @@ class homestate extends State<HomeScreen> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(
-                        "image/test.png",
+                        "image/header.png",
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -125,7 +125,7 @@ class homestate extends State<HomeScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Transform.translate(
-                      offset: Offset(25, 35),
+                      offset: Offset(25, 45),
                       child: Image.asset(
                         'image/rostologo.png',
                         alignment: Alignment.bottomRight,
@@ -140,7 +140,7 @@ class homestate extends State<HomeScreen> {
                       child: Text(
                         'الفروع',
                         style:
-                            TextStyle(fontSize: 14, fontFamily: "thesansbold"),
+                            TextStyle(fontSize: 18, fontFamily: "thesansbold"),
                       )),
                 ),
                 Expanded(

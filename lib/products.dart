@@ -14,9 +14,16 @@ import 'package:rosto_f/product_list.dart';
 import 'package:rosto_f/settings.dart';
 
 class products extends StatefulWidget {
+  static String numss;
+  products(String num)
+  {
+    numss=num;
+  }
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
+    print('aaaaaaqqqqqqq${numss}');
     return products_state();
   }
 }
@@ -26,13 +33,12 @@ class products_state extends State<products> {
   List<product_list> mylist = new List<product_list>();
   Map map = new Map();
   Map map_list = new Map();
-
   static int get selectedPos => 2;
 
   //GET CATEGORIES DATA
   Future<List<product_list>> get_data() async {
     var response = await http.get(
-        'https://webdesign.be4em.info/rosto_api_ar/Category/getCategoryProducutByBranchId/549834453/25598/1/3');
+        'https://webdesign.be4em.info/rosto_api_ar/Category/getCategoryProducutByBranchId/549834453/25598/${1}/3');
     if (response.statusCode == 200) {
       var data = convert.jsonDecode(response.body);
       map.addAll(data);
@@ -92,14 +98,14 @@ class products_state extends State<products> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("image/topimage.png"),
+                image: AssetImage("image/header.png"),
                 fit: BoxFit.cover,
               ),
             ),
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Transform.translate(
-                offset: Offset(25, 35),
+                offset: Offset(25, 45),
                 child: Image.asset(
                   'image/rostologo.png',
                   alignment: Alignment.bottomRight,

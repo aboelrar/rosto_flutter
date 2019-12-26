@@ -36,7 +36,7 @@ class categoriesState extends State<categories> {
 
   //GET CATEGORIES DATA
   Future<List<categories_list>> get_data() async {
-    var response = await http.get('${apis.categories}2/2');
+    var response = await http.get('${apis.categories}');
     if (response.statusCode == 200) {
       var data = convert.jsonDecode(response.body);
       map.addAll(data);
@@ -99,45 +99,18 @@ class categoriesState extends State<categories> {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("image/topimage.png"),
+                      image: AssetImage("image/header.png"),
                       fit: BoxFit.cover),
                 ),
-                child: Column(
-                  children: <Widget>[
-                    Transform.translate(
-                        offset: Offset(0, 20),
-                        child: Text(
-                          'الفرع الاول',
-                          style: TextStyle(
-                              fontFamily: "thesansbold",
-                              color: Colors.white,
-                              fontSize: 14),
-                        )),
-                    Transform.translate(
-                      offset: Offset(-20, 70),
-                      child: Align(
-                          alignment: Alignment.topRight,
-                          child: Text(
-                            'الفرع الاول',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                          )),
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Transform.translate(
+                    offset: Offset(25, 45),
+                    child: Image.asset(
+                      'image/rostologo.png',
+                      alignment: Alignment.bottomRight,
                     ),
-                    Transform.translate(
-                      offset: Offset(-20, 70),
-                      child: Align(
-                          alignment: Alignment.topRight,
-                          child: Text(
-                            '01141012485',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                          )),
-                    ),
-                  ],
+                  ),
                 ),
               ),
               Container(
@@ -150,7 +123,7 @@ class categoriesState extends State<categories> {
                     alignment: Alignment.topRight,
                     child: Text(
                       'الاصناف',
-                      style: TextStyle(fontSize: 14, fontFamily: "thesansbold"),
+                      style: TextStyle(fontSize: 17, fontFamily: "thesansbold"),
                     )),
               ),
               FutureBuilder(
@@ -187,16 +160,20 @@ class categoriesState extends State<categories> {
                                     onTap: () {
                                       Navigator.push(context, MaterialPageRoute(
                                           builder: (BuildContext context) {
-                                        return products();
+                                        return products(snapshot.data[index].num);
                                       }));
                                     },
                                     child: Center(
                                         child: Card(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(10.0),
+                                          ),
                                       margin: EdgeInsets.only(
                                           left: 15.0, right: 15.0),
-                                      elevation: 10.0,
+                                      elevation: 15.0,
                                       child: Container(
-                                        height: 250.0,
+                                        height: 270.0,
                                         child: Column(
                                           children: <Widget>[
 
@@ -232,79 +209,87 @@ class categoriesState extends State<categories> {
                                                       },*/
                                                     ),
                                                   ),
-                                                ),flex: 5,
+                                                ),flex: 8,
                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(top: 5.0),
-                                            ),
                                             Flexible(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 20.0),
-                                                child: Align(
-                                                  alignment: Alignment.topRight,
-                                                  child: Text(
-                                                    snapshot.data[index].title,
-                                                    style: TextStyle(
-                                                        fontFamily: 'thesansbold',
-                                                        fontSize: 13.0,
-                                                        color: Colors.black),
-                                                  ),
-                                                ),
-                                              ),
-                                              flex: 1,
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(top: 5.0),
-                                            ),
-                                            Flexible(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 20.0),
-                                                child: Align(
-                                                    alignment: Alignment.topRight,
-                                                    child: Text(
-                                                      snapshot.data[index].desc,
-                                                      style: TextStyle(
-                                                          fontSize: 12.0),
-                                                    )),
-                                              ),
-                                              flex: 1,
-                                            ),
-                                            Flexible(
-                                              child: Align(
-                                                alignment: Alignment.topRight,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
+                                              child: Container(
+                                                margin: EdgeInsets.only(top: 5.0,bottom: 5.0),
+                                                child: Column(
                                                   children: <Widget>[
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 3.0,top:5.0, bottom: 3.0),
-                                                      child: Text(
-                                                        'صنف',
-                                                        style: TextStyle(
-                                                            color: Colors.red,
-                                                            fontSize: 12.0),
+                                                    Flexible(
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(
+                                                            right: 20.0),
+                                                        child: Align(
+                                                          alignment: Alignment.topRight,
+                                                          child: Text(
+                                                            snapshot.data[index].title,
+                                                            style: TextStyle(
+                                                                fontFamily: 'thesansbold',
+                                                                fontSize: 15.0,
+                                                                color: Colors.black),
+                                                          ),
+                                                        ),
                                                       ),
+                                                      flex: 1,
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 20.0),
-                                                      child: Text(
-                                                        '22',
-                                                        style: TextStyle(
-                                                            color: Colors.red,
-                                                            fontSize: 12.0),
+                                                    Flexible(
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(
+                                                            right: 20.0,top: 5.0),
+                                                        child: Align(
+                                                            alignment: Alignment.topRight,
+                                                            child: Text(
+                                                              snapshot.data[index].desc,
+                                                              style: TextStyle(
+                                                                  fontSize: 12.0),
+                                                            )),
                                                       ),
+                                                      flex: 1,
+                                                    ),
+                                                    Flexible(
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(top: 5.0),
+                                                        child: Align(
+                                                          alignment: Alignment.topRight,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                            MainAxisAlignment.end,
+                                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                                            children: <Widget>[
+                                                              Padding(
+                                                                padding:
+                                                                const EdgeInsets.only(
+                                                                    right: 3.0),
+                                                                child: Text(
+                                                                  'صنف',
+                                                                  style: TextStyle(
+                                                                      color: Colors.red,
+                                                                      fontSize: 12.0),
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                const EdgeInsets.only(
+                                                                    right: 20.0,top: 2.0),
+                                                                child: Text(
+                                                                  '22',
+                                                                  style: TextStyle(
+                                                                      color: Colors.red,
+                                                                      fontSize: 12.0),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      flex: 1,
                                                     ),
                                                   ],
                                                 ),
                                               ),
-                                              flex: 2,
-                                            )
+                                              flex: 4,
+                                            ),
                                           ],
                                         ),
                                       ),

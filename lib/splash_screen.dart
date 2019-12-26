@@ -33,10 +33,14 @@ class splash_state extends State<splash_screen> {
   void initState() {
 
     super.initState();
-    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+  /*  Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       check_connection();
     });
-
+*/
+    Timer(
+        Duration(seconds: 3),
+            () => Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (BuildContext context) => login())));
   }
 
 
